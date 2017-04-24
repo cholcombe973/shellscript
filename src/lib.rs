@@ -5,10 +5,15 @@ use std::io::{Read, Write};
     Possibly could be used to parse others as well
 */
 
+/// A very basic representation of a shell script. There is an interpreter, some comments
+/// and a list of commands
 #[derive(Debug)]
 pub struct ShellScript {
+    ///the interpreter to use
     pub interpreter: String,
+    /// Any comments here will be joined with newlines when written back out
     pub comments: Vec<String>,
+    /// Any commands here will be joined with newlines when written back out
     pub commands: Vec<String>,
 }
 
