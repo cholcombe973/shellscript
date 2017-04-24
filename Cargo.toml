@@ -1,0 +1,10 @@
+[package]
+name = "shellscript"
+description = "Extremely basic shellscript parser"
+version = "0.1.0"
+authors = ["Chris Holcombe <xfactor973@gmail.com>"]
+homepage = "https://github.com/cholcombe973/shellscript"
+license = "MIT"
+documentation = "https://docs.rs/shellscript"
+
+[dependencies]
