@@ -1,4 +1,4 @@
-use std::io::{Read, Write};
+use std::io::{Error, Read, Write};
 
 /*
     Parse the /etc/rc.local file.
@@ -19,7 +19,7 @@ pub struct ShellScript {
 
 impl ShellScript {
     /// Write the run control struct back out to a file
-    pub fn write<T: Write>(&self, f: &mut T) -> Result<usize, ::std::io::Error> {
+    pub fn write<T: Write>(&self, f: &mut T) -> Result<usize, Error> {
         let mut bytes_written = 0;
         bytes_written += f.write(format!("{}\n", self.interpreter).as_bytes())?;
         bytes_written += f.write(self.comments.join("\n").as_bytes())?;
@@ -56,13 +56,13 @@ exit 0
     let result2 = result.write(&mut buff).unwrap();
 }
 
-pub fn parse<T: Read>(f: &mut T) -> Result<ShellScript, String> {
+pub fn parse<T: Read>(f: &mut T) -> Result<ShellScript, Error> {
     let mut comments: Vec<String> = Vec::new();
     let mut commands: Vec<String> = Vec::new();
     let mut interpreter = String::new();
 
     let mut buf = String::new();
-    f.read_to_string(&mut buf).map_err(|e| e.to_string())?;
+    f.read_to_string(&mut buf)?;
 
     for line in buf.lines() {
         let trimmed = line.trim();
