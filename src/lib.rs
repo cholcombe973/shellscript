@@ -25,6 +25,7 @@ impl ShellScript {
         bytes_written += f.write(self.comments.join("\n").as_bytes())?;
         bytes_written += f.write(&"\n".as_bytes())?;
         bytes_written += f.write(self.commands.join("\n").as_bytes())?;
+        bytes_written += f.write(&"\n".as_bytes())?;
         Ok(bytes_written)
     }
 }
